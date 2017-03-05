@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: langzi
-subtitle: 不知道能坚持多久
-description:
+title: ZMGLOVE
+subtitle: 我刚刚睡着,天刚刚破晓
+description: 字母哥
 author: czh
 language: zh-Hans
 timezone:
@@ -71,3 +71,4 @@ deploy:
   type: git
   repo: git@github.com:langzi1949/zmglove.git
   branch : gh-pages
+  message : zmg  update {{ now('YYYY-MM-DD HH:mm:ss') }})
