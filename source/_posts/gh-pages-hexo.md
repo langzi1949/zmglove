@@ -51,5 +51,6 @@ cd themes
 git clone https://github.com/iissnan/hexo-theme-next ./next/
 ```
 这样整好以后,*hexo server* 就可以访问到页面内容了！
+以上
 
 
