@@ -17,12 +17,6 @@ root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
-# SubNav
-subnav:
-  github: "#"
-  weibo: "#"
-  rss: "#"
-  zhihu: "#"
 # Directory
 source_dir: source
 public_dir: public
@@ -33,6 +27,12 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
 
+
+# Social links
+social:
+  GitHub: https://github.com/langzi1949
+  Weibo: https://weibo.com/u/2126293941
+  zhihu: https://www.zhihu.com/people/langzi1949
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
