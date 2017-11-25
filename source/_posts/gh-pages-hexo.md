@@ -31,6 +31,7 @@ npm --registry https://registry.npm.taobao.org info underscore
 registry = https://registry.npm.taobao.org
 ```
 上述三种方法都可以,但有时候不行,我是用的第三个。
+<!--more-->
 
 ##### 2.hexo deploy后github上显示的是打包后文件
 这个问题是因为在github上只建了一个分支，而且分支取得名字是 gh-pages
