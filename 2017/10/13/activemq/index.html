@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java," />
+  <meta name="keywords" content="java,ActiveMQ," />
 
 
 
@@ -79,40 +79,34 @@
 
 
 
-<meta name="description" content="java中事务的管理有两类: 声明式和编程式. 编程式实用比较繁琐耦合度较高不常用,这里主要讲下声明式事务.
+<meta name="description" content="问题描述
+解决方案
 
+问题描述
 
-声明式事务常用的使用方法有两种:
-
-
-
-基于AspectJ的方式 通过spring的面向切面编程AOP来进行配置，按照方法的名字进行管理，无需在类中添加任何东西.
-基于注解的方式 配置简单，在业务层类上添加注解@Transactional.">
+生产发现，当消息中间件activeMQ挂掉后，我们的应用并不能重新连接到activeMQ,而必须通过重启应用才能连接。本地测试应用持续抛异常：
+1234567891011122017-02-27 20:05:37.297 ERROR [jmsContainer-1] o.s.j.l.DefaultMessageListenerContainer - Could">
 <meta property="og:type" content="article">
-<meta property="og:title" content="去除只读操作中的事务控制">
-<meta property="og:url" content="http://zmglove.com/2017/09/09/Spring-Transtate/index.html">
+<meta property="og:title" content="ActiveMQ重连问题">
+<meta property="og:url" content="http://zmglove.com/2017/10/13/activemq/index.html">
 <meta property="og:site_name" content="ZMGLOVE">
-<meta property="og:description" content="java中事务的管理有两类: 声明式和编程式. 编程式实用比较繁琐耦合度较高不常用,这里主要讲下声明式事务.
+<meta property="og:description" content="问题描述
+解决方案
 
+问题描述
 
-声明式事务常用的使用方法有两种:
-
-
-
-基于AspectJ的方式 通过spring的面向切面编程AOP来进行配置，按照方法的名字进行管理，无需在类中添加任何东西.
-基于注解的方式 配置简单，在业务层类上添加注解@Transactional.">
-<meta property="og:updated_time" content="2017-11-25T14:14:10.000Z">
+生产发现，当消息中间件activeMQ挂掉后，我们的应用并不能重新连接到activeMQ,而必须通过重启应用才能连接。本地测试应用持续抛异常：
+1234567891011122017-02-27 20:05:37.297 ERROR [jmsContainer-1] o.s.j.l.DefaultMessageListenerContainer - Could">
+<meta property="og:updated_time" content="2017-11-26T12:41:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="去除只读操作中的事务控制">
-<meta name="twitter:description" content="java中事务的管理有两类: 声明式和编程式. 编程式实用比较繁琐耦合度较高不常用,这里主要讲下声明式事务.
+<meta name="twitter:title" content="ActiveMQ重连问题">
+<meta name="twitter:description" content="问题描述
+解决方案
 
+问题描述
 
-声明式事务常用的使用方法有两种:
-
-
-
-基于AspectJ的方式 通过spring的面向切面编程AOP来进行配置，按照方法的名字进行管理，无需在类中添加任何东西.
-基于注解的方式 配置简单，在业务层类上添加注解@Transactional.">
+生产发现，当消息中间件activeMQ挂掉后，我们的应用并不能重新连接到activeMQ,而必须通过重启应用才能连接。本地测试应用持续抛异常：
+1234567891011122017-02-27 20:05:37.297 ERROR [jmsContainer-1] o.s.j.l.DefaultMessageListenerContainer - Could">
 
 
 
@@ -142,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://zmglove.com/2017/09/09/Spring-Transtate/"/>
+  <link rel="canonical" href="http://zmglove.com/2017/10/13/activemq/"/>
 
 
 
 
 
-  <title>去除只读操作中的事务控制 | ZMGLOVE</title>
+  <title>ActiveMQ重连问题 | ZMGLOVE</title>
   
 
 
@@ -275,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/09/09/Spring-Transtate/">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/10/13/activemq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chenzehao">
@@ -292,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">去除只读操作中的事务控制</h1>
+          <h1 class="post-title" itemprop="name headline">ActiveMQ重连问题</h1>
         
 
         <div class="post-meta">
@@ -304,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T11:23:09+08:00">
-                2017-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T19:00:08+08:00">
+                2017-10-13
               </time>
             
 
@@ -342,35 +336,22 @@
       
 
       
-        <p>java中事务的管理有两类: 声明式和编程式. 编程式实用比较繁琐耦合度较高不常用,这里主要讲下声明式事务.</p>
-<hr>
-<ul>
-<li><strong>声明式事务常用的使用方法有两种:</strong></li>
+        <ul>
+<li><a href="#active_1">问题描述</a></li>
+<li><a href="#active_2">解决方案</a></li>
 </ul>
-<blockquote>
-<ol>
-<li>基于AspectJ的方式<br> 通过spring的面向切面编程AOP来进行配置，按照方法的名字进行管理，无需在类中添加任何东西.</li>
-<li>基于注解的方式<br> 配置简单，在业务层类上添加注解<code>@Transactional</code>.</li>
-</ol>
-</blockquote>
-<a id="more"></a>
-<p>配置事例:<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;</div><div class="line"></div><div class="line">   &lt;!--dataSource是数据库连接的数据源--&gt;</div><div class="line"></div><div class="line">&lt;property name="dataSource" ref="dataSource" /&gt;</div><div class="line"></div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;tx:advice id="txAdvice" transaction-manager="transactionManager"&gt;</div><div class="line"></div><div class="line">       &lt;tx:attributes&gt;</div><div class="line"></div><div class="line">           &lt;tx:method name="add*" propagation="REQUIRES_NEW" rollback-for="Exception"/&gt;</div><div class="line"></div><div class="line">           &lt;tx:method name="del*" propagation="REQUIRES_NEW" rollback-for="Exception"/&gt;</div><div class="line"></div><div class="line">           &lt;tx:method name="save*" propagation="REQUIRES_NEW" rollback-for="Exception"/&gt;</div><div class="line"></div><div class="line">           &lt;tx:method name="update*" propagation="REQUIRES_NEW" rollback-for="Exception"/&gt;</div><div class="line"></div><div class="line">  &lt;tx:method name="*" propagation="NOT_SUPPORTED" rollback-for="Exception" /&gt;  </div><div class="line"></div><div class="line">       &lt;/tx:attributes&gt;</div><div class="line"></div><div class="line">   &lt;/tx:advice&gt;</div><div class="line"></div><div class="line">   &lt;aop:config proxy-target-class="true"&gt;</div><div class="line"></div><div class="line">      &lt;aop:pointcut expression="execution(* com.zmglove.user.service.*.*(..))" id="pointcut" /&gt;</div><div class="line"></div><div class="line">      &lt;aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/&gt;</div><div class="line"></div><div class="line">   &lt;/aop:config&gt;</div></pre></td></tr></table></figure></p>
-<p>解释:</p>
-<ol>
-<li><p>传播特性:</p>
-<blockquote>
-<p>REQUIRED（默认值）：在有transaction状态下执行；如当前没有transaction，则创建新的transaction；<br>SUPPORTS：如当前有transaction，则在transaction状态下执行；如果当前没有transaction，在无transaction状态下执行；<br>MANDATORY：必须在有transaction状态下执行，如果当前没有transaction，则抛出异常IllegalTransactionStateException；<br>REQUIRES_NEW：创建新的transaction并执行；如果当前已有transaction，则将当前transaction挂起；<br>NOT_SUPPORTED：在无transaction状态下执行；如果当前已有transaction，则将当前transaction挂起<br>NEVER：在无transaction状态下执行；如果当前已有transaction，则抛出异常IllegalTransactionStateException。 </p>
-</blockquote>
-</li>
-<li><p>切点pointcut:</p>
-<blockquote>
-<p>如上配置对service业务逻辑层进行切面添加事务, 对于service层中以add,del,save,update开头的接口是需要事务控制的,默认其他是不需要的,如需要事务控制可以在对应实现接口方法上面添加支持事务的注解:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Transactional</span>(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ol>
+<p><span id="active_1"><strong>问题描述</strong></span></p>
 <hr>
-<p>所以为了提高系统性能,在只读的接口上去掉事务的控制. 配置可参考如上非add,del,save,update开头的接口和没有<code>@Transactional</code>注解的接口都是不支持事务的.</p>
+<p>生产发现，当消息中间件activeMQ挂掉后，我们的应用并不能重新连接到activeMQ,而必须通过重启应用才能连接。<br>本地测试应用持续抛异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">2017</span>-<span class="number">02</span>-<span class="number">27</span> <span class="number">20</span>:<span class="number">05</span>:<span class="number">37.297</span> ERROR [jmsContainer-<span class="number">1</span>] o.s.j.l.DefaultMessageListenerContainer - Could not refresh JMS Connection <span class="keyword">for</span> destination <span class="string">'queue://gateway.qly.queue'</span> - retrying using FixedBackOff&#123;interval=<span class="number">5000</span>, currentAttempts=<span class="number">27</span>, maxAttempts=unlimited&#125;. Cause: <span class="keyword">this</span> connection</div><div class="line">org.apache.activemq.AlreadyClosedException: <span class="keyword">this</span> connection</div><div class="line"> at org.apache.activemq.pool.PooledConnection.assertNotClosed(PooledConnection.java:<span class="number">208</span>) ~[activemq-pool-<span class="number">5.7</span>.0.jar:<span class="number">5.7</span>.0]</div><div class="line"> at org.apache.activemq.pool.PooledConnection.start(PooledConnection.java:<span class="number">97</span>) ~[activemq-pool-<span class="number">5.7</span>.0.jar:<span class="number">5.7</span>.0]</div><div class="line"> at org.springframework.jms.connection.SingleConnectionFactory$SharedConnectionInvocationHandler.localStart(SingleConnectionFactory.java:<span class="number">632</span>) ~[spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.connection.SingleConnectionFactory$SharedConnectionInvocationHandler.invoke(SingleConnectionFactory.java:<span class="number">569</span>) ~[spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at com.sun.proxy.$Proxy58.start(Unknown Source) ~[na:na]</div><div class="line"> at org.springframework.jms.listener.AbstractJmsListeningContainer.refreshSharedConnection(AbstractJmsListeningContainer.java:<span class="number">400</span>) ~[spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.listener.DefaultMessageListenerContainer.refreshConnectionUntilSuccessful(DefaultMessageListenerContainer.java:<span class="number">915</span>) [spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.listener.DefaultMessageListenerContainer.recoverAfterListenerSetupFailure(DefaultMessageListenerContainer.java:<span class="number">890</span>) [spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:<span class="number">1061</span>) [spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at java.lang.Thread.run(Thread.java:<span class="number">745</span>) [na:<span class="number">1.7</span>.0_79]</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><span id="active_2"><strong>解决方案</strong></span></p>
+<hr>
+<p>activeMQ采用failover方式，在断开连接后由client起一个新线程不断从配置的url获取一个url重试连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">failOver:(tcp:<span class="comment">//xxx.xxx.xxx.xxx:61616)?startupMaxReconnectAttempts=2</span></div></pre></td></tr></table></figure>
+<p><code>startupMaxReconnectAttempts</code>为启动阶段的最大重连次数，默认-1，无限重连</p>
+<p>当使用spring jms连接activeMQ时，经测试brokerURL不配置failOver时应用也会尝试重连，但持续报上述错误。<br>原因是没有设置<code>SingleConnectionFactory</code>对象的<code>reconnectOnException</code>属性。<br>它的默认值是false，意味着即使JMS异常抛出，SingleConnectionFactory自带的connection没有重置。<br>在调用getConnection()方法时,由于连接没有重置，this.connection != null，仍然返回旧的connection.<br>从而DefaultMessageListenerContainer引用的连接仍然失败连接，不断抛出异常。<br>正确配置如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;bean id="connectionFactory"</div><div class="line"> class="org.springframework.jms.connection.SingleConnectionFactory"&gt;</div><div class="line"> &lt;property name="targetConnectionFactory" ref="pooledConnectionFactory" /&gt;</div><div class="line"> &lt;property name="reconnectOnException" value="true"/&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+<p>另外，一下配置可以更改断线重连时间，recoveryInterval默认时间5000ms。由于每一个DefaultMessageListenerContainer对象均会尝试重连，<br>合理设置该属性，避免过量打印错误日志<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;bean id="xxxContainer" </div><div class="line">        class="org.springframework.jms.listener.DefaultMessageListenerContainer"&gt; </div><div class="line">        ..................</div><div class="line">  &lt;property name="recoveryInterval" value="30000" /&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -390,6 +371,8 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
+            <a href="/tags/ActiveMQ/" rel="tag"># ActiveMQ</a>
+          
         </div>
       
 
@@ -401,8 +384,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/24/gh-pages-hexo/" rel="next" title="gh-pages加上Hexo搭建Blog">
-                <i class="fa fa-chevron-left"></i> gh-pages加上Hexo搭建Blog
+              <a href="/2017/10/08/iterm2-omz/" rel="next" title="iTerm2+oh my zsh+agnoster 最好用的终端">
+                <i class="fa fa-chevron-left"></i> iTerm2+oh my zsh+agnoster 最好用的终端
               </a>
             
           </div>
@@ -411,8 +394,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/20/mongodb/" rel="prev" title="记一次MongoDB线上问题处理">
-                记一次MongoDB线上问题处理 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/26/middleware-specification/" rel="prev" title="中间件使用规范">
+                中间件使用规范 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
