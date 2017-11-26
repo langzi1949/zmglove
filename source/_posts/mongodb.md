@@ -19,8 +19,9 @@ tags:
 > 三台Mongodb集群机器的CPU飙高，一直稳定在<font color="red" size="4">95%</font>以上，<font color="red" size="4">基本已经压死了服务</font>
 
 !["CPU飙升"](/images/mongo_1.jpg)
-!["负载飙升"](/images/mongo_2.jpg)
 <!--more-->
+!["负载飙升"](/images/mongo_2.jpg)
+
 ---
 <span id="m3"><strong>问题分析</strong></span>
 
