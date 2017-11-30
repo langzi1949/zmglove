@@ -20,7 +20,8 @@ tags:
 <span id="m2"><strong>抓取网页</strong></span>
 
 ---
-1. **python的urllib库进行网页抓取**
+1.**python的urllib库进行网页抓取**
+
 !["豆瓣热映影片"](/images/douban_1.jpg)
 ```python
     from urllib import request
@@ -28,7 +29,8 @@ tags:
     html_data = resp.read().decode('utf-8')
 ```
 可以访问<a href="https://movie.douban.com/cinema/nowplaying/shanghai/">https://movie.douban.com/cinema/nowplaying/shanghai/</a>，就是豆瓣热映的电影首页，其中html_data存放的数据就是网页的html代码。
-2. **使用beautifulsoup对html代码进行解析**
+
+2.**使用beautifulsoup对html代码进行解析**
 ```python
     from bs4 import BeautifulSoup as bs
     soup = bs(html_data, 'html.parser')    
@@ -38,7 +40,8 @@ tags:
 !["豆瓣热映影片div"](/images/douban_2.jpg)
 通过我们对页面的分析(在浏览器上进行页面检查)，发现热映的影片都在`div id="nowplaying"`标签下，find_all方法返回的列表，然后在这个`div`中继续检查，发现所有的影片在一个`ul`的`li`下面，都有一个统一的名字`list-item`，
 这样就能够拿到所有热映的影片了。
-3. **继续使用beautifulsoup分析影评**
+
+3.**继续使用beautifulsoup分析影评**
 上一步中得到的`data-subject`就是影片的id，通过访问<a href="https://movie.douban.com/subject/20495023/comments">https://movie.douban.com/subject/20495023/comments</a>，就能看到相关的影评，其中<font color="red">20495023</font>就是上一步得到的`data-subject`。
 !["豆瓣热映影评div"](/images/douban_3.jpg)
 ```python
