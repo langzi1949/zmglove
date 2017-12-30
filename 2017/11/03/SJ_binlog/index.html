@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java,MongoDB," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -79,62 +79,26 @@
 
 
 
-<meta name="description" content="问题发生
-问题表现
-问题分析
-问题解决
-问题总结
-
-问题发生
-
-2017年8月25日，上午10点前后
-
-
-问题表现
-
-三台Mongodb集群机器的CPU飙高，一直稳定在95%以上，基本已经压死了服务">
+<meta name="description" content="前言在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是第三方订单：XXXXX重复下单，请确认！。
+事件回顾
+通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次MongoDB线上问题处理">
-<meta property="og:url" content="http://zmglove.com/2017/09/20/mongodb/index.html">
+<meta property="og:title" content="记一次重复订单问题总结">
+<meta property="og:url" content="http://zmglove.com/2017/11/03/SJ_binlog/index.html">
 <meta property="og:site_name" content="ZMGLOVE">
-<meta property="og:description" content="问题发生
-问题表现
-问题分析
-问题解决
-问题总结
-
-问题发生
-
-2017年8月25日，上午10点前后
-
-
-问题表现
-
-三台Mongodb集群机器的CPU飙高，一直稳定在95%以上，基本已经压死了服务">
-<meta property="og:image" content="http://zmglove.com/images/mongo_1.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_2.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_3.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_4.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_5.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_6.jpg">
-<meta property="og:updated_time" content="2017-11-26T12:49:50.000Z">
+<meta property="og:description" content="前言在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是第三方订单：XXXXX重复下单，请确认！。
+事件回顾
+通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平">
+<meta property="og:image" content="http://zmglove.com/images/SJ_1.jpg">
+<meta property="og:image" content="http://zmglove.com/images/SJ_2.jpg">
+<meta property="og:image" content="http://zmglove.com/images/SJ_3.jpg">
+<meta property="og:updated_time" content="2017-12-02T14:42:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次MongoDB线上问题处理">
-<meta name="twitter:description" content="问题发生
-问题表现
-问题分析
-问题解决
-问题总结
-
-问题发生
-
-2017年8月25日，上午10点前后
-
-
-问题表现
-
-三台Mongodb集群机器的CPU飙高，一直稳定在95%以上，基本已经压死了服务">
-<meta name="twitter:image" content="http://zmglove.com/images/mongo_1.jpg">
+<meta name="twitter:title" content="记一次重复订单问题总结">
+<meta name="twitter:description" content="前言在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是第三方订单：XXXXX重复下单，请确认！。
+事件回顾
+通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平">
+<meta name="twitter:image" content="http://zmglove.com/images/SJ_1.jpg">
 
 
 
@@ -164,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://zmglove.com/2017/09/20/mongodb/"/>
+  <link rel="canonical" href="http://zmglove.com/2017/11/03/SJ_binlog/"/>
 
 
 
 
 
-  <title>记一次MongoDB线上问题处理 | ZMGLOVE</title>
+  <title>记一次重复订单问题总结 | ZMGLOVE</title>
   
 
 
@@ -297,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/09/20/mongodb/">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/11/03/SJ_binlog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chenzehao">
@@ -314,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">记一次MongoDB线上问题处理</h1>
+          <h1 class="post-title" itemprop="name headline">记一次重复订单问题总结</h1>
         
 
         <div class="post-meta">
@@ -326,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T16:08:09+08:00">
-                2017-09-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T19:08:56+08:00">
+                2017-11-03
               </time>
             
 
@@ -364,52 +328,33 @@
       
 
       
-        <ul>
-<li><a href="#m1">问题发生</a></li>
-<li><a href="#m2">问题表现</a></li>
-<li><a href="#m3">问题分析</a></li>
-<li><a href="#m4">问题解决</a></li>
-<li><a href="#m5">问题总结</a></li>
-</ul>
-<p><span id="m1"><strong>问题发生</strong></span></p>
-<blockquote>
-<p>2017年8月25日，上午10点前后</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是<strong><code>第三方订单：XXXXX重复下单，请确认！</code></strong>。</p>
+<h3 id="事件回顾"><a href="#事件回顾" class="headerlink" title="事件回顾"></a>事件回顾</h3><blockquote>
+<p>通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。<br>此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平台的日志报文，显示收到两条请求信息，时间间隔毫秒级。<br>结果：10-09 和A召开了电话会议，确认了问题。<br>A的http下单接口在公对公的网络中会出现延迟，且他们内部有重发机制。在他们的多台服务器之间，一台服务器消费有延迟的情况下，另一台服务器就会接着消费。但是返回给我们的结果却是重复下单，后续XX方修复了该问题。</p>
 </blockquote>
-<hr>
-<p><span id="m2"><strong>问题表现</strong></span></p>
-<blockquote>
-<p>三台Mongodb集群机器的CPU飙高，一直稳定在<font color="red" size="4">95%</font>以上，<font color="red" size="4">基本已经压死了服务</font></p>
+<a id="more"></a>
+<h3 id="问题排查细节"><a href="#问题排查细节" class="headerlink" title="问题排查细节"></a>问题排查细节</h3><h4 id="问题方向"><a href="#问题方向" class="headerlink" title="问题方向"></a>问题方向</h4><blockquote>
+<p>1.我方下单业务走了多遍，多次调用A方下单接口<br>2.我方下单业务走了一遍，http调用时A方接收多次（httpclient为A方封装后的AHttp）</p>
 </blockquote>
-<p><img src="/images/mongo_1.jpg" alt="&quot;CPU飙升&quot;"><br><a id="more"></a><br><img src="/images/mongo_2.jpg" alt="&quot;负载飙升&quot;"></p>
-<hr>
-<p><span id="m3"><strong>问题分析</strong></span></p>
-<p>DBA和运维以及开发，通过上述的现象进行分析，可能是</p>
-<blockquote>
-<ol>
-<li>MongoDB在使用的时候，连接数没有释放，由于长连接导致的CPU过高。后经研发同事发现，并没有出现这种情况，连接数一直保持在合理的状态。</li>
-<li>MongoDB读的collection已经存储了近10亿的数据，可能有慢查询导致负载过高，但是开启mongo的慢查询监控，并没有发现有慢查询。</li>
-<li>MongoDB写入数据慢，经过DBA的排查，监控MongoDB操作日志，发现写入一条数据贼慢，基本在10s以上</li>
-</ol>
+<h4 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h4><blockquote>
+<p>1.通过生产上的两台实例，查询重复订单号“2017092811667848913” 发现在9.28  13:20:01-13:20:05秒之间只消费一次kafka消息，结果为下单失败。另一台找寻不到日志信息<br>2.生产库binlog查看下来，发现A方怀疑我们重复发起的那笔订单所在的表t_elect_req_order_bak，在11:30-14：30时段内的所有更新事件。<font color="red">只发现单一一条操作记录的信息，没有发现多条操作即直接由15(待处理)-&gt;30(取消)（目前我们已查看多条订单）。</font></p>
 </blockquote>
-<p>至此，我们发现问题的原因是<font color="red" size="4">MongoDb的写入速度很慢，导致了负载过高。</font></p>
-<hr>
-<p><span id="m4"><strong>问题解决</strong></span></p>
-<p>既然我们已经找出了问题的症结，就要着手去解决它。</p>
-<blockquote>
-<ol>
-<li>首先，我们尝试不往原有的旧collection中写入数据，因为旧有数据已经达到10亿级别，这样写入肯定会很慢，所以我们<font color="red" size="3"><em>先停止向旧collection中写入，往一张新的collection中写入</em>，</font>看看能不能使得CPU和负载降下来。做了这一次优化调整，发现依旧没有解决问题，CPU和负载在短时间内又飙升的很高。</li>
-<li>既然这个法子行不通，我们就要考虑机器本身的问题，运维在服务器上监控，发现数据的IO很慢，由于这个机器所使用的磁盘是普通磁盘，所以磁盘的IO速度很慢，不足以满足大数据量的IO，因此，服务器的扩容和升级刻不容缓。在得到有关领导的授权以后，<table><tr><td bgcolor="yellow">运维进行了阿里云的SSD磁盘采购，SSD的磁盘读写速度相比较普通磁盘优势很明显。</td></tr></table></li>
-<li>在采购和升级以及极其耗时的数据迁移过后，重新启动的MongoDB的服务。在短时间内，CPU和负载都降下来很多，就在我们以为服务OK，问题已经得到解决时,<font color="red" size="3"><strong>突然发现机器的CPU和负载瞬间飙升。</strong></font></li>
-</ol>
+<h4 id="binlog日志"><a href="#binlog日志" class="headerlink" title="binlog日志"></a>binlog日志</h4><blockquote>
+<p>通过他们接受订单的信息的时间（2017-08-28 13:20:04），发现在相对应的时间我们只有消费了一笔消息。<br>后续我们这边又通过数据库的日志，查询到针对我们跟A方交互的订单号2017092811667848913 的binlog日志，发现在在11:30-14：30 时间段内所有的更新事件，<font color="red">发现该笔订单只更新一次。</font></p>
 </blockquote>
-<p>以下两张图片反应了当时的情况：<br><img src="/images/mongo_3.jpg" alt="&quot;CPU飙升&quot;"><br><img src="/images/mongo_4.jpg" alt="&quot;负载飙升&quot;"></p>
-<p>发现问题并没有得到根本的解决，我们继续分析问题，DBA继续在MongoDB的监控中，查看日志，发现查询的数据很慢，我们<code>怀疑是不是新建的collection没有加上索引</code>，排查一看，</p>
-<p><strong>发现新建的两张collection中索引建的有问题，导致查询的速度很慢，占用连接数，进而导致负载和CPU飙高。最后，重新建索引，跟踪一段时间发现问题得到的很好的解决</strong>。</p>
-<p>下图是最近几天的负载和CPU情况<br><img src="/images/mongo_5.jpg" alt="&quot;CPU&quot;"><br><img src="/images/mongo_6.jpg" alt="&quot;负载&quot;"></p>
-<hr>
-<p><span id="m5"><strong>问题总结</strong></span></p>
+<p><img src="/images/SJ_1.jpg" alt="&quot;binlog1&quot;"></p>
 <blockquote>
-<p>分析问题的时候，要多方面的去考虑，还要和别人一起配合探讨，集思广益，可能不会一步解决问题，但是要敢于尝试。</p>
+<p>订单刚从进件系统进入采购系统:</p>
+</blockquote>
+<p><img src="/images/SJ_2.jpg" alt="&quot;binlog2&quot;"></p>
+<blockquote>
+<p>订单信息完善，准备发送A方</p>
+</blockquote>
+<p><img src="/images/SJ_3.jpg" alt="&quot;binlog3&quot;"></p>
+<p>接受到A方消息，订单结果更改为重复下单。<strong>由此我们有理由相信非我方重复发起下单操作</strong>。</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>通过该事件，我们总结一下几点</p>
+<blockquote>
+<p>①采购这边没有明确的报文日志记录，如有则第一时间就能排查问题。需要添加<br>②对于第三方结果的解析有误以至于重复下单解析为失败（应为下单成功）<br>③在采购的数据库的操作上，对更新数据没有加上安全限制<br>④更新状态值的时候，要保证状态被修改的状态值是否业务正确</p>
 </blockquote>
 
       
@@ -430,8 +375,6 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
-          
         </div>
       
 
@@ -443,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/09/Spring-Transtate/" rel="next" title="去除只读操作中的事务控制">
-                <i class="fa fa-chevron-left"></i> 去除只读操作中的事务控制
+              <a href="/2017/10/26/middleware-specification/" rel="next" title="中间件使用规范">
+                <i class="fa fa-chevron-left"></i> 中间件使用规范
               </a>
             
           </div>
@@ -453,8 +396,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/08/iterm2-omz/" rel="prev" title="iTerm2+oh my zsh+agnoster 最好用的终端">
-                iTerm2+oh my zsh+agnoster 最好用的终端 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/30/douban1/" rel="prev" title="Python分析豆瓣热映电影影评">
+                Python分析豆瓣热映电影影评 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -507,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -585,6 +537,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件回顾"><span class="nav-number">1.0.1.</span> <span class="nav-text">事件回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题排查细节"><span class="nav-number">1.0.2.</span> <span class="nav-text">问题排查细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题方向"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">问题方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排查"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#binlog日志"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">binlog日志</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后续"><span class="nav-number">1.0.3.</span> <span class="nav-text">后续</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

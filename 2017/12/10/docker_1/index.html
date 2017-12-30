@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java,MongoDB," />
+  <meta name="keywords" content="Docker," />
 
 
 
@@ -79,62 +79,26 @@
 
 
 
-<meta name="description" content="问题发生
-问题表现
-问题分析
-问题解决
-问题总结
+<meta name="description" content="背景容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。
 
-问题发生
-
-2017年8月25日，上午10点前后
-
-
-问题表现
-
-三台Mongodb集群机器的CPU飙高，一直稳定在95%以上，基本已经压死了服务">
+容器和虚拟机话不多说，直接上图！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次MongoDB线上问题处理">
-<meta property="og:url" content="http://zmglove.com/2017/09/20/mongodb/index.html">
+<meta property="og:title" content="Docker学习笔记--安装">
+<meta property="og:url" content="http://zmglove.com/2017/12/10/docker_1/index.html">
 <meta property="og:site_name" content="ZMGLOVE">
-<meta property="og:description" content="问题发生
-问题表现
-问题分析
-问题解决
-问题总结
+<meta property="og:description" content="背景容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。
 
-问题发生
-
-2017年8月25日，上午10点前后
-
-
-问题表现
-
-三台Mongodb集群机器的CPU飙高，一直稳定在95%以上，基本已经压死了服务">
-<meta property="og:image" content="http://zmglove.com/images/mongo_1.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_2.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_3.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_4.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_5.jpg">
-<meta property="og:image" content="http://zmglove.com/images/mongo_6.jpg">
-<meta property="og:updated_time" content="2017-11-26T12:49:50.000Z">
+容器和虚拟机话不多说，直接上图！">
+<meta property="og:image" content="http://zmglove.com/images/docker.jpg">
+<meta property="og:image" content="http://zmglove.com/images/docker_1.jpg">
+<meta property="og:image" content="http://zmglove.com/images/docker_3.jpeg">
+<meta property="og:updated_time" content="2017-12-30T13:20:14.238Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次MongoDB线上问题处理">
-<meta name="twitter:description" content="问题发生
-问题表现
-问题分析
-问题解决
-问题总结
+<meta name="twitter:title" content="Docker学习笔记--安装">
+<meta name="twitter:description" content="背景容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。
 
-问题发生
-
-2017年8月25日，上午10点前后
-
-
-问题表现
-
-三台Mongodb集群机器的CPU飙高，一直稳定在95%以上，基本已经压死了服务">
-<meta name="twitter:image" content="http://zmglove.com/images/mongo_1.jpg">
+容器和虚拟机话不多说，直接上图！">
+<meta name="twitter:image" content="http://zmglove.com/images/docker.jpg">
 
 
 
@@ -164,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://zmglove.com/2017/09/20/mongodb/"/>
+  <link rel="canonical" href="http://zmglove.com/2017/12/10/docker_1/"/>
 
 
 
 
 
-  <title>记一次MongoDB线上问题处理 | ZMGLOVE</title>
+  <title>Docker学习笔记--安装 | ZMGLOVE</title>
   
 
 
@@ -297,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/09/20/mongodb/">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/12/10/docker_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chenzehao">
@@ -314,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">记一次MongoDB线上问题处理</h1>
+          <h1 class="post-title" itemprop="name headline">Docker学习笔记--安装</h1>
         
 
         <div class="post-meta">
@@ -326,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T16:08:09+08:00">
-                2017-09-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T08:09:23+08:00">
+                2017-12-10
               </time>
             
 
@@ -364,53 +328,39 @@
       
 
       
-        <ul>
-<li><a href="#m1">问题发生</a></li>
-<li><a href="#m2">问题表现</a></li>
-<li><a href="#m3">问题分析</a></li>
-<li><a href="#m4">问题解决</a></li>
-<li><a href="#m5">问题总结</a></li>
+        <p><img src="/images/docker.jpg" alt="&quot;Docker&quot;"></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。</p>
+<hr>
+<h3 id="容器和虚拟机"><a href="#容器和虚拟机" class="headerlink" title="容器和虚拟机"></a>容器和虚拟机</h3><p>话不多说，直接上图！<br><img src="/images/docker_1.jpg" alt="&quot;Container Vs VM&quot;"></p>
+<hr>
+<a id="more"></a>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><h4 id="Linux-和-Mac"><a href="#Linux-和-Mac" class="headerlink" title="Linux 和 Mac"></a>Linux 和 Mac</h4><p>由于linux和mac有点天然的优势，他们安装docker是异常的方便，随便在网上找一个教程就行了，这边就不赘述了。</p>
+</li>
+<li><h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4></li>
+<li><h5 id="Windows-10"><a href="#Windows-10" class="headerlink" title="Windows 10+"></a>Windows 10+</h5><p>win10也不用说了，docker官方是支持win10的，直接下载<code>docker for windows</code>就行了。</p>
+</li>
+<li><h5 id="Windows7"><a href="#Windows7" class="headerlink" title="Windows7"></a>Windows7</h5><p>win7目前使用率还是挺高的，那我们怎么学习Docker呢？有办法，就是装虚拟机，但是我一般不赞成装很重的虚拟机，就简单的就行了，所以我肯定是推荐使用<code>docker-toolbox</code>，下载的话推荐使用阿里云的镜像<a href="http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox" target="_blank" rel="external">docker-toolbox</a>。<br>PS：遇到的一些坑</p>
+</li>
+<li>点击<code>Docker Quickstart Terminal</code>图标启动，不能正常启动</li>
 </ul>
-<p><span id="m1"><strong>问题发生</strong></span></p>
 <blockquote>
-<p>2017年8月25日，上午10点前后</p>
+<p>因为会检测boot2docker是否是最新版本，所以很慢。所以先从Github上下载最新版本的<a href="https://github.com/boot2docker/boot2docker/releases" target="_blank" rel="external">boot2docker</a>，并复制到<code>C:\Users\Administrator\.docker\machine\cache</code>目录下。</p>
 </blockquote>
-<hr>
-<p><span id="m2"><strong>问题表现</strong></span></p>
+<ul>
+<li>VM无法启动</li>
+</ul>
 <blockquote>
-<p>三台Mongodb集群机器的CPU飙高，一直稳定在<font color="red" size="4">95%</font>以上，<font color="red" size="4">基本已经压死了服务</font></p>
+<p>可能是window系统默认没有开动虚拟支持，所有先打开计算机的虚拟支持。进入<code>bios</code>寻找virtual ….&gt;Disabled，修改成Enabled。</p>
 </blockquote>
-<p><img src="/images/mongo_1.jpg" alt="&quot;CPU飙升&quot;"><br><a id="more"></a><br><img src="/images/mongo_2.jpg" alt="&quot;负载飙升&quot;"></p>
-<hr>
-<p><span id="m3"><strong>问题分析</strong></span></p>
-<p>DBA和运维以及开发，通过上述的现象进行分析，可能是</p>
+<ul>
+<li>如何设置阿里云镜像加速</li>
+</ul>
 <blockquote>
-<ol>
-<li>MongoDB在使用的时候，连接数没有释放，由于长连接导致的CPU过高。后经研发同事发现，并没有出现这种情况，连接数一直保持在合理的状态。</li>
-<li>MongoDB读的collection已经存储了近10亿的数据，可能有慢查询导致负载过高，但是开启mongo的慢查询监控，并没有发现有慢查询。</li>
-<li>MongoDB写入数据慢，经过DBA的排查，监控MongoDB操作日志，发现写入一条数据贼慢，基本在10s以上</li>
-</ol>
+<p><code>bash
+docker-machine create --engine-registry-mirror=https://f224s644.mirror.aliyuncs.com -d virtualbox default</code>，其中<code>https://f224s644.mirror.aliyuncs.com</code>是我自己的阿里云专属镜像地址，自己使用的话，需要申请就行了<a href="https://dev.aliyun.com" target="_blank" rel="external">阿里云开发者平台</a></p>
 </blockquote>
-<p>至此，我们发现问题的原因是<font color="red" size="4">MongoDb的写入速度很慢，导致了负载过高。</font></p>
-<hr>
-<p><span id="m4"><strong>问题解决</strong></span></p>
-<p>既然我们已经找出了问题的症结，就要着手去解决它。</p>
-<blockquote>
-<ol>
-<li>首先，我们尝试不往原有的旧collection中写入数据，因为旧有数据已经达到10亿级别，这样写入肯定会很慢，所以我们<font color="red" size="3"><em>先停止向旧collection中写入，往一张新的collection中写入</em>，</font>看看能不能使得CPU和负载降下来。做了这一次优化调整，发现依旧没有解决问题，CPU和负载在短时间内又飙升的很高。</li>
-<li>既然这个法子行不通，我们就要考虑机器本身的问题，运维在服务器上监控，发现数据的IO很慢，由于这个机器所使用的磁盘是普通磁盘，所以磁盘的IO速度很慢，不足以满足大数据量的IO，因此，服务器的扩容和升级刻不容缓。在得到有关领导的授权以后，<table><tr><td bgcolor="yellow">运维进行了阿里云的SSD磁盘采购，SSD的磁盘读写速度相比较普通磁盘优势很明显。</td></tr></table></li>
-<li>在采购和升级以及极其耗时的数据迁移过后，重新启动的MongoDB的服务。在短时间内，CPU和负载都降下来很多，就在我们以为服务OK，问题已经得到解决时,<font color="red" size="3"><strong>突然发现机器的CPU和负载瞬间飙升。</strong></font></li>
-</ol>
-</blockquote>
-<p>以下两张图片反应了当时的情况：<br><img src="/images/mongo_3.jpg" alt="&quot;CPU飙升&quot;"><br><img src="/images/mongo_4.jpg" alt="&quot;负载飙升&quot;"></p>
-<p>发现问题并没有得到根本的解决，我们继续分析问题，DBA继续在MongoDB的监控中，查看日志，发现查询的数据很慢，我们<code>怀疑是不是新建的collection没有加上索引</code>，排查一看，</p>
-<p><strong>发现新建的两张collection中索引建的有问题，导致查询的速度很慢，占用连接数，进而导致负载和CPU飙高。最后，重新建索引，跟踪一段时间发现问题得到的很好的解决</strong>。</p>
-<p>下图是最近几天的负载和CPU情况<br><img src="/images/mongo_5.jpg" alt="&quot;CPU&quot;"><br><img src="/images/mongo_6.jpg" alt="&quot;负载&quot;"></p>
-<hr>
-<p><span id="m5"><strong>问题总结</strong></span></p>
-<blockquote>
-<p>分析问题的时候，要多方面的去考虑，还要和别人一起配合探讨，集思广益，可能不会一步解决问题，但是要敢于尝试。</p>
-</blockquote>
+<p>至此，安装已经完成！<br><img src="/images/docker_3.jpeg" alt="&quot;toolbox&quot;"></p>
 
       
     </div>
@@ -428,9 +378,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
-          
-            <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
           
         </div>
       
@@ -443,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/09/Spring-Transtate/" rel="next" title="去除只读操作中的事务控制">
-                <i class="fa fa-chevron-left"></i> 去除只读操作中的事务控制
+              <a href="/2017/11/30/douban1/" rel="next" title="Python分析豆瓣热映电影影评">
+                <i class="fa fa-chevron-left"></i> Python分析豆瓣热映电影影评
               </a>
             
           </div>
@@ -452,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/08/iterm2-omz/" rel="prev" title="iTerm2+oh my zsh+agnoster 最好用的终端">
-                iTerm2+oh my zsh+agnoster 最好用的终端 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -507,8 +451,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -585,6 +538,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器和虚拟机"><span class="nav-number">2.</span> <span class="nav-text">容器和虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux-和-Mac"><span class="nav-number">3.1.</span> <span class="nav-text">Linux 和 Mac</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows"><span class="nav-number">3.2.</span> <span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Windows-10"><span class="nav-number">3.2.1.</span> <span class="nav-text">Windows 10+</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Windows7"><span class="nav-number">3.2.2.</span> <span class="nav-text">Windows7</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
