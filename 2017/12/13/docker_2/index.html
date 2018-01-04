@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java," />
+  <meta name="keywords" content="Docker," />
 
 
 
@@ -79,26 +79,18 @@
 
 
 
-<meta name="description" content="前言在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是第三方订单：XXXXX重复下单，请确认！。
-事件回顾
-通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平">
+<meta name="description" content="运行第一个镜像1sudo docker run ubuntu echo &quot;Hello World&quot;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次重复订单问题总结">
-<meta property="og:url" content="http://zmglove.com/2017/11/03/SJ_binlog/index.html">
+<meta property="og:title" content="Docker学习笔记--入门">
+<meta property="og:url" content="http://zmglove.com/2017/12/13/docker_2/index.html">
 <meta property="og:site_name" content="ZMGLOVE">
-<meta property="og:description" content="前言在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是第三方订单：XXXXX重复下单，请确认！。
-事件回顾
-通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平">
-<meta property="og:image" content="http://zmglove.com/images/SJ_1.jpg">
-<meta property="og:image" content="http://zmglove.com/images/SJ_2.jpg">
-<meta property="og:image" content="http://zmglove.com/images/SJ_3.jpg">
-<meta property="og:updated_time" content="2017-12-02T14:42:46.000Z">
+<meta property="og:description" content="运行第一个镜像1sudo docker run ubuntu echo &quot;Hello World&quot;">
+<meta property="og:image" content="http://zmglove.com/images/docker.jpg">
+<meta property="og:updated_time" content="2018-01-04T02:18:28.889Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次重复订单问题总结">
-<meta name="twitter:description" content="前言在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是第三方订单：XXXXX重复下单，请确认！。
-事件回顾
-通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平">
-<meta name="twitter:image" content="http://zmglove.com/images/SJ_1.jpg">
+<meta name="twitter:title" content="Docker学习笔记--入门">
+<meta name="twitter:description" content="运行第一个镜像1sudo docker run ubuntu echo &quot;Hello World&quot;">
+<meta name="twitter:image" content="http://zmglove.com/images/docker.jpg">
 
 
 
@@ -128,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://zmglove.com/2017/11/03/SJ_binlog/"/>
+  <link rel="canonical" href="http://zmglove.com/2017/12/13/docker_2/"/>
 
 
 
 
 
-  <title>记一次重复订单问题总结 | ZMGLOVE</title>
+  <title>Docker学习笔记--入门 | ZMGLOVE</title>
   
 
 
@@ -261,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/11/03/SJ_binlog/">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/12/13/docker_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chenzehao">
@@ -278,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">记一次重复订单问题总结</h1>
+          <h1 class="post-title" itemprop="name headline">Docker学习笔记--入门</h1>
         
 
         <div class="post-meta">
@@ -290,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T19:08:56+08:00">
-                2017-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-13T23:08:45+08:00">
+                2017-12-13
               </time>
             
 
@@ -328,34 +320,50 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在国庆节前夕，公司和某电商平台A进行对接，发现了有重复下单的情况，对方返回的message就是<strong><code>第三方订单：XXXXX重复下单，请确认！</code></strong>。</p>
-<h3 id="事件回顾"><a href="#事件回顾" class="headerlink" title="事件回顾"></a>事件回顾</h3><blockquote>
-<p>通过运营反馈的工单发现A有重复下单的数据，最后统计下来从2017-06-27开始截止到2017-09-28共发现65笔A返回重复下单的数据。<br>此事反馈到A方后，双方就问题定位展开讨论。我方通过代码以及日志发现不存在重复下单的可能性。A方拿出他们公共平台的日志报文，显示收到两条请求信息，时间间隔毫秒级。<br>结果：10-09 和A召开了电话会议，确认了问题。<br>A的http下单接口在公对公的网络中会出现延迟，且他们内部有重发机制。在他们的多台服务器之间，一台服务器消费有延迟的情况下，另一台服务器就会接着消费。但是返回给我们的结果却是重复下单，后续XX方修复了该问题。</p>
-</blockquote>
+        <p><img src="/images/docker.jpg" alt="&quot;Docker&quot;"></p>
+<h3 id="运行第一个镜像"><a href="#运行第一个镜像" class="headerlink" title="运行第一个镜像"></a>运行第一个镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run ubuntu <span class="built_in">echo</span> <span class="string">"Hello World"</span></div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="问题排查细节"><a href="#问题排查细节" class="headerlink" title="问题排查细节"></a>问题排查细节</h3><h4 id="问题方向"><a href="#问题方向" class="headerlink" title="问题方向"></a>问题方向</h4><blockquote>
-<p>1.我方下单业务走了多遍，多次调用A方下单接口<br>2.我方下单业务走了一遍，http调用时A方接收多次（httpclient为A方封装后的AHttp）</p>
-</blockquote>
-<h4 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h4><blockquote>
-<p>1.通过生产上的两台实例，查询重复订单号“2017092811667848913” 发现在9.28  13:20:01-13:20:05秒之间只消费一次kafka消息，结果为下单失败。另一台找寻不到日志信息<br>2.生产库binlog查看下来，发现A方怀疑我们重复发起的那笔订单所在的表t_elect_req_order_bak，在11:30-14：30时段内的所有更新事件。<font color="red">只发现单一一条操作记录的信息，没有发现多条操作即直接由15(待处理)-&gt;30(取消)（目前我们已查看多条订单）。</font></p>
-</blockquote>
-<h4 id="binlog日志"><a href="#binlog日志" class="headerlink" title="binlog日志"></a>binlog日志</h4><blockquote>
-<p>通过他们接受订单的信息的时间（2017-08-28 13:20:04），发现在相对应的时间我们只有消费了一笔消息。<br>后续我们这边又通过数据库的日志，查询到针对我们跟A方交互的订单号2017092811667848913 的binlog日志，发现在在11:30-14：30 时间段内所有的更新事件，<font color="red">发现该笔订单只更新一次。</font></p>
-</blockquote>
-<p><img src="/images/SJ_1.jpg" alt="&quot;binlog1&quot;"></p>
+<p>会输出以下的结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Uable to find image <span class="string">'ubuntu'</span> locally</div><div class="line">ubuntu:latest:The image you are pulling has bean verified</div><div class="line">...</div><div class="line">...</div><div class="line">Status: Dowloaded newer image <span class="keyword">for</span> ubuntu:latest</div><div class="line">Hello World</div></pre></td></tr></table></figure></p>
+<p>这究竟发生了什么？<br>在我们调用docker run命令，就启动了一个容器。其中<code>ubuntu</code>参数是我们打算使用的镜像。输出的第一行告诉我们本地没有ubuntu镜像。Docker便会在<code>Dokcer Hub</code>进行在线搜索，并下载ubuntu最新版本的镜像。镜像下载完成以后，Docker会将它转为容器并运行，然后在容器中执行我们指定的命令<code>echo &quot;Hello World&quot;</code>，输出的结果显示在最后一行。</p>
+<h3 id="请求Docker容器中的Shell"><a href="#请求Docker容器中的Shell" class="headerlink" title="请求Docker容器中的Shell"></a>请求Docker容器中的Shell</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo docker run -t -i  ubuntu bash</div><div class="line">root@c92578c38131:/<span class="comment"># echo "Hello Docker"</span></div><div class="line">Hello Docker</div><div class="line">root@c92578c38131:/<span class="comment"># exit</span></div><div class="line"><span class="built_in">exit</span></div></pre></td></tr></table></figure>
+<p>这样就会和ssh进入远程主机相似。其中的<code>-t -i</code>参数表示我们想要一个交互式的会话，当你退出Shell的时候，容器就会停止- <strong>主进程运行多久，容器就运行多久</strong></p>
+<h3 id="Docker化"><a href="#Docker化" class="headerlink" title="Docker化"></a>Docker化</h3><ul>
+<li><p>首先启动一个容器，并安装一些包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sudo docker run -ti --name cowsay --hostname cowsay debian bash</div><div class="line">root@cowsay:/<span class="comment"># apt-get update</span></div><div class="line">...</div><div class="line">Reading package lists... Done</div><div class="line">root@cowsay:/<span class="comment"># apt-get install -y cowsay fortune</span></div><div class="line">...</div><div class="line">root@cowsay:/<span class="comment">#</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>docker commit</code> 命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker commit cowsay <span class="built_in">test</span>/cowsayimage</div></pre></td></tr></table></figure>
+</li>
+<li><p>验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sudo docker run <span class="built_in">test</span>/cowsayimage /usr/games/cowsay <span class="string">'Moooo'</span></div><div class="line"></div><div class="line"> _______</div><div class="line">&lt; Moooo &gt;</div><div class="line"> -------</div><div class="line">        \   ^__^</div><div class="line">         \  (oo)\_______</div><div class="line">            (__)\       )\/\</div><div class="line">                ||----w |</div><div class="line">                ||     ||</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用Dockerfile创建镜像<br>使用Dockerfile主要是为了<code>可复用性</code>，是创建镜像的过程自动化。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir cowsay</div><div class="line"><span class="built_in">cd</span> cowsay</div><div class="line">vim Dockerfile</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>然后将以下内容放入Dockerfile中</p>
 <blockquote>
-<p>订单刚从进件系统进入采购系统:</p>
+<p>FROM debian:latest<br><br>RUN apt-get update &amp;&amp; apt-get install -y cowsay fortune</p>
 </blockquote>
-<p><img src="/images/SJ_2.jpg" alt="&quot;binlog2&quot;"></p>
-<blockquote>
-<p>订单信息完善，准备发送A方</p>
-</blockquote>
-<p><img src="/images/SJ_3.jpg" alt="&quot;binlog3&quot;"></p>
-<p>接受到A方消息，订单结果更改为重复下单。<strong>由此我们有理由相信非我方重复发起下单操作</strong>。</p>
-<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>通过该事件，我们总结一下几点</p>
-<blockquote>
-<p>①采购这边没有明确的报文日志记录，如有则第一时间就能排查问题。需要添加<br>②对于第三方结果的解析有误以至于重复下单解析为失败（应为下单成功）<br>③在采购的数据库的操作上，对更新数据没有加上安全限制<br>④更新状态值的时候，要保证状态被修改的状态值是否业务正确</p>
-</blockquote>
+<ul>
+<li>生成镜像<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker build -t <span class="built_in">test</span>/cowsay-dockerfile .</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="registry到云仓库中"><a href="#registry到云仓库中" class="headerlink" title="registry到云仓库中"></a>registry到云仓库中</h3><p>我使用的是阿里云的仓库服务，简单的说明一下：</p>
+<ul>
+<li>登录到<a href="https://dev.aliyun.com" target="_blank" rel="external">阿里云</a>上的<code>管理中心</code>。</li>
+<li>创建一个命名空间</li>
+<li>创建一个镜像仓库</li>
+<li><p>登录到阿里云docker registry(以我为例)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker login --username=chenzehao_1949@126.com registry.cn-hangzhou.aliyuncs.com</div></pre></td></tr></table></figure>
+</li>
+<li><p>将镜像推送到registry(以我为例)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/langzi_1949/docker-images:[镜像版本号]</div><div class="line">$ sudo docker push registry.cn-hangzhou.aliyuncs.com/langzi_1949/docker-images:[镜像版本号]</div></pre></td></tr></table></figure>
+</li>
+<li><p>从registry中拉取镜像(以我为例)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker pull registry.cn-hangzhou.aliyuncs.com/langzi_1949/docker-images:[镜像版本号]</div></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -373,7 +381,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
           
         </div>
       
@@ -386,8 +394,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/26/middleware-specification/" rel="next" title="中间件使用规范">
-                <i class="fa fa-chevron-left"></i> 中间件使用规范
+              <a href="/2017/12/10/docker_1/" rel="next" title="Docker学习笔记--安装">
+                <i class="fa fa-chevron-left"></i> Docker学习笔记--安装
               </a>
             
           </div>
@@ -395,10 +403,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/30/douban1/" rel="prev" title="Python分析豆瓣热映电影影评">
-                Python分析豆瓣热映电影影评 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -547,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件回顾"><span class="nav-number">1.0.1.</span> <span class="nav-text">事件回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题排查细节"><span class="nav-number">1.0.2.</span> <span class="nav-text">问题排查细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题方向"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">问题方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排查"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#binlog日志"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">binlog日志</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后续"><span class="nav-number">1.0.3.</span> <span class="nav-text">后续</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行第一个镜像"><span class="nav-number">1.</span> <span class="nav-text">运行第一个镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求Docker容器中的Shell"><span class="nav-number">2.</span> <span class="nav-text">请求Docker容器中的Shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker化"><span class="nav-number">3.</span> <span class="nav-text">Docker化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#registry到云仓库中"><span class="nav-number">4.</span> <span class="nav-text">registry到云仓库中</span></a></li></ol></div>
             
 
           </div>
