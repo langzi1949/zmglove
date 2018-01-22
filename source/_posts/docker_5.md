@@ -125,3 +125,8 @@ Running Development Server
  * Debugger is active!
  * Debugger PIN: 130-199-939
 ```
+
+PS：可能会出现`standard_init_linux.go:175: exec user process caused "no such file or directory"`错误，那是因为在Window下，shell脚本的格式有问题。可以直接执行
+```bash
+dos2unix cmd.sh
+```
