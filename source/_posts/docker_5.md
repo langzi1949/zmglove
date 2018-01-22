@@ -130,3 +130,23 @@ PS：可能会出现`standard_init_linux.go:175: exec user process caused "no su
 ```bash
 dos2unix cmd.sh
 ```
+
+#### docker-compose
+使用docker-compose进行自动化的部署
+在Dockerfile同级目录中创建一个`docker-compose.yml`文件：
+```bash
+#一定要注意层级格式，可以参考docker-compose官方文档
+helloflask_2:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      ENV: DEV
+    volumes:
+      - ./app:/app
+```
+写好文件以后，开始运行文件
+```bash
+sudo docker-compose up
+```
+最终执行的结果和`docker run`命令几乎一模一样。
