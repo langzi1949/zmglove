@@ -79,25 +79,18 @@
 
 
 
-<meta name="description" content="背景容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。
-
-容器和虚拟机话不多说，直接上图！">
+<meta name="description" content="主体架构废话不多说，Docker主要组成部分如下：一般来说，周边的技术还有很多：Swarm、Compose、Kubernetes等。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker学习笔记--安装">
-<meta property="og:url" content="http://zmglove.com/2017/12/10/docker_1/index.html">
+<meta property="og:title" content="Docker学习笔记--再入门">
+<meta property="og:url" content="http://zmglove.com/2017/12/18/docker_3/index.html">
 <meta property="og:site_name" content="ZMGLOVE">
-<meta property="og:description" content="背景容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。
-
-容器和虚拟机话不多说，直接上图！">
+<meta property="og:description" content="主体架构废话不多说，Docker主要组成部分如下：一般来说，周边的技术还有很多：Swarm、Compose、Kubernetes等。">
 <meta property="og:image" content="http://zmglove.com/images/docker.jpg">
-<meta property="og:image" content="http://zmglove.com/images/docker_1.jpg">
-<meta property="og:image" content="http://zmglove.com/images/docker_3.jpeg">
-<meta property="og:updated_time" content="2017-12-30T13:20:14.238Z">
+<meta property="og:image" content="http://zmglove.com/images/docker_4.jpg">
+<meta property="og:updated_time" content="2018-01-19T14:28:29.538Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker学习笔记--安装">
-<meta name="twitter:description" content="背景容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。
-
-容器和虚拟机话不多说，直接上图！">
+<meta name="twitter:title" content="Docker学习笔记--再入门">
+<meta name="twitter:description" content="主体架构废话不多说，Docker主要组成部分如下：一般来说，周边的技术还有很多：Swarm、Compose、Kubernetes等。">
 <meta name="twitter:image" content="http://zmglove.com/images/docker.jpg">
 
 
@@ -128,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://zmglove.com/2017/12/10/docker_1/"/>
+  <link rel="canonical" href="http://zmglove.com/2017/12/18/docker_3/"/>
 
 
 
 
 
-  <title>Docker学习笔记--安装 | ZMGLOVE</title>
+  <title>Docker学习笔记--再入门 | ZMGLOVE</title>
   
 
 
@@ -261,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/12/10/docker_1/">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/12/18/docker_3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="langzi">
@@ -278,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker学习笔记--安装</h1>
+          <h1 class="post-title" itemprop="name headline">Docker学习笔记--再入门</h1>
         
 
         <div class="post-meta">
@@ -290,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T08:09:23+08:00">
-                2017-12-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-18T20:09:00+08:00">
+                2017-12-18
               </time>
             
 
@@ -329,38 +322,28 @@
 
       
         <p><img src="/images/docker.jpg" alt="&quot;Docker&quot;"></p>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>容器化技术正在如火如荼的开展着，其中Docker就是其中的集大成者，所以学习Docker迫在眉睫。</p>
-<hr>
-<h3 id="容器和虚拟机"><a href="#容器和虚拟机" class="headerlink" title="容器和虚拟机"></a>容器和虚拟机</h3><p>话不多说，直接上图！<br><img src="/images/docker_1.jpg" alt="&quot;Container Vs VM&quot;"></p>
-<hr>
-<a id="more"></a>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
-<li><h4 id="Linux-和-Mac"><a href="#Linux-和-Mac" class="headerlink" title="Linux 和 Mac"></a>Linux 和 Mac</h4><p>由于linux和mac有点天然的优势，他们安装docker是异常的方便，随便在网上找一个教程就行了，这边就不赘述了。</p>
+<h3 id="主体架构"><a href="#主体架构" class="headerlink" title="主体架构"></a>主体架构</h3><p>废话不多说，Docker主要组成部分如下：<br><img src="/images/docker_4.jpg" alt="&quot;Docker主体&quot;"><br>一般来说，周边的技术还有很多：Swarm、Compose、Kubernetes等。<br><a id="more"></a></p>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><h5 id="镜像层"><a href="#镜像层" class="headerlink" title="镜像层"></a>镜像层</h5><p>Dockerfile中的每个指令执行后都会产生一个新的<code>镜像层</code>，而这个镜像层其实是用来启动容器的。一个新的镜像层的建立，是用上一层的镜像启动容器，然后执行Dockerfile的指令后，把它保存为一个新的镜像。<br>如果在一个Dockerfile中写下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FROM debian:latest</div><div class="line"></div><div class="line">RUN apt-get update &amp;&amp; apt-get install -y cowsay fortune</div></pre></td></tr></table></figure></p>
+<p>然后执行，会发现：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Sending build context to Docker daemon  2.048kB</div><div class="line">Step 1/2 : FROM debian:latest</div><div class="line"> ---&gt; da653cee0545</div><div class="line">Step 2/2 : RUN apt-get update &amp;&amp; apt-get install -y cowsay fortune</div><div class="line"> ---&gt; Running <span class="keyword">in</span> cf4be5720ad4</div><div class="line">......</div><div class="line">Removing intermediate container cf4be5720ad4</div><div class="line"> ---&gt; 0615075d910e</div><div class="line">Successfully built 0615075d910e</div><div class="line">Successfully tagged <span class="built_in">test</span>/cowsay-dockerfile1:latest</div></pre></td></tr></table></figure></p>
+<p>观察上面，可以发现<code>cf4be5720ad4</code> 这个镜像层，启动了一个临时容器，最后又被remove了。<br>PS：当执行<code>docker build</code>的时候，Docker会查看FROM指令所指向的镜像，如果本地没有镜像，Docker会试图下载他；本地已有该镜像，Docker就会使用他，不会再检查是否是最新版本的。</p>
+<h3 id="容器相连"><a href="#容器相连" class="headerlink" title="容器相连"></a>容器相连</h3><p>假设你正在一个容器中运行 Web 服务器。你如何使外界能访问它呢？答案是通过 -p 或 -P选项来“发布”端口。这个命令能够将主机的端口转发到容器上：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo docker run <span class="_">-d</span> -p 8000:80 nginx</div><div class="line">...</div><div class="line">curl localhost:8000</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>其中的 <code>-p 8000:80</code> 参数告诉 Docker 将主机的 8000 端口转发至容器的 80 端口。</p>
+<h3 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h3><p>利用数据卷和数据容器管理数据，他其实就是一个目录，但不属于UFS的一部分。</p>
+<h5 id="方法1-docker-v"><a href="#方法1-docker-v" class="headerlink" title="方法1:docker -v"></a>方法1:docker -v</h5><ul>
+<li><p>首先在执行docker时，通过<code>-v</code>选项来宣告一个数据卷：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo docker run -it --name container-test -h CONTAINER -v /data debian /bin/bash</div><div class="line">root@CONTAINER:/<span class="comment"># ls /data/</span></div><div class="line">root@CONTAINER:</div></pre></td></tr></table></figure>
 </li>
-<li><h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4></li>
-<li><h5 id="Windows-10"><a href="#Windows-10" class="headerlink" title="Windows 10+"></a>Windows 10+</h5><p>win10也不用说了，docker官方是支持win10的，直接下载<code>docker for windows</code>就行了。</p>
+<li><p>在新的shell中执行<code>docker inspect</code>命令，找出数据卷在主机上的实际位置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo docker inspect <span class="_">-f</span> &#123;&#123;.Mounts&#125;&#125; container-test</div><div class="line">[&#123;volume 1f7..33 /mnt/sda1/var/lib/docker/volumes/1f7..33/_data /data <span class="built_in">local</span>  <span class="literal">true</span> &#125;]</div></pre></td></tr></table></figure>
 </li>
-<li><h5 id="Windows7"><a href="#Windows7" class="headerlink" title="Windows7"></a>Windows7</h5><p>win7目前使用率还是挺高的，那我们怎么学习Docker呢？有办法，就是装虚拟机，但是我一般不赞成装很重的虚拟机，就简单的就行了，所以我肯定是推荐使用<code>docker-toolbox</code>，下载的话推荐使用阿里云的镜像<a href="http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox" target="_blank" rel="external">docker-toolbox</a>。<br>PS：遇到的一些坑</p>
-</li>
-<li>点击<code>Docker Quickstart Terminal</code>图标启动，不能正常启动</li>
 </ul>
-<blockquote>
-<p>因为会检测boot2docker是否是最新版本，所以很慢。所以先从Github上下载最新版本的<a href="https://github.com/boot2docker/boot2docker/releases" target="_blank" rel="external">boot2docker</a>，并复制到<code>C:\Users\Administrator\.docker\machine\cache</code>目录下。</p>
-</blockquote>
-<ul>
-<li>VM无法启动</li>
-</ul>
-<blockquote>
-<p>可能是window系统默认没有开动虚拟支持，所有先打开计算机的虚拟支持。进入<code>bios</code>寻找virtual ….&gt;Disabled，修改成Enabled。</p>
-</blockquote>
-<ul>
-<li>如何设置阿里云镜像加速</li>
-</ul>
-<blockquote>
-<p><code>bash
-docker-machine create --engine-registry-mirror=https://f224s644.mirror.aliyuncs.com -d virtualbox default</code>，其中<code>https://f224s644.mirror.aliyuncs.com</code>是我自己的阿里云专属镜像地址，自己使用的话，需要申请就行了<a href="https://dev.aliyun.com" target="_blank" rel="external">阿里云开发者平台</a></p>
-</blockquote>
-<p>至此，安装已经完成！<br><img src="/images/docker_3.jpeg" alt="&quot;toolbox&quot;"></p>
+<p>然后我们就会发现容器的 /data/ 卷仅仅是一个指向主机中 /var/lib/docker/volumes/5cad…/_data 目录的连接</p>
+<h5 id="方法2：Dockerfile中使用VOLUME指令"><a href="#方法2：Dockerfile中使用VOLUME指令" class="headerlink" title="方法2：Dockerfile中使用VOLUME指令"></a>方法2：Dockerfile中使用VOLUME指令</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">FROM debian:latest</div><div class="line">VOLUME /data</div></pre></td></tr></table></figure>
+<p>这个方法和第一种的效果是相同的。<br>如果要在Dockerfile设置数据卷的权限，以下设置不会产生效果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FROM debian:latest</div><div class="line">RUN useradd foo</div><div class="line">VOLUME /data</div><div class="line">RUN touch /data/x</div><div class="line">RUN chown -R foo:foo /data</div></pre></td></tr></table></figure></p>
+<p>以上是不会有效果的，因为这些效果都是在临时容器中执行产生的，当命令结束的时候，这个卷也会被删除。<br>正确的方式应该是以下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FROM debian:latest</div><div class="line">RUN useradd foo</div><div class="line">RUN mkdir /data &amp;&amp; touch /data/x</div><div class="line">RUN chown -R foo:foo /data</div><div class="line">VOLUME /data</div></pre></td></tr></table></figure></p>
+<h5 id="方法3：docker-v-拓展"><a href="#方法3：docker-v-拓展" class="headerlink" title="方法3：docker -v 拓展"></a>方法3：docker -v 拓展</h5><p>通过这个方法直接指定主机的目录，命令格式为<code>-v HOST_DIR:CONTAINER_DIR</code>。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -v /home/adrian/data:/data debian ls /data</div></pre></td></tr></table></figure></p>
+<h3 id="数据容器"><a href="#数据容器" class="headerlink" title="数据容器"></a>数据容器</h3><p>这种容器的目的就是为了与其他容器进行数据共享。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run --name dbdata postgres <span class="built_in">echo</span> <span class="string">'Data-only container for postgres'</span></div></pre></td></tr></table></figure></p>
+<p>这个命令就是从postgres中创建一个容器，并且初始化镜像中定义的所有数据卷，执行执行<code>echo</code>退出（没有必要在后台一直运行，浪费资源）。<br>现在就可以通过<code>--volume-from</code>参数，使得其他容器也能够使用这个数据卷。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run <span class="_">-d</span>  --volume-form dbdata --name db1 postgres</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -391,8 +374,8 @@ docker-machine create --engine-registry-mirror=https://f224s644.mirror.aliyuncs.
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/30/douban1/" rel="next" title="Python分析豆瓣热映电影影评">
-                <i class="fa fa-chevron-left"></i> Python分析豆瓣热映电影影评
+              <a href="/2017/12/13/docker_2/" rel="next" title="Docker学习笔记--入门">
+                <i class="fa fa-chevron-left"></i> Docker学习笔记--入门
               </a>
             
           </div>
@@ -401,8 +384,8 @@ docker-machine create --engine-registry-mirror=https://f224s644.mirror.aliyuncs.
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/13/docker_2/" rel="prev" title="Docker学习笔记--入门">
-                Docker学习笔记--入门 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/22/docker_4/" rel="prev" title="Docker学习笔记--命令">
+                Docker学习笔记--命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -552,7 +535,7 @@ docker-machine create --engine-registry-mirror=https://f224s644.mirror.aliyuncs.
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器和虚拟机"><span class="nav-number">2.</span> <span class="nav-text">容器和虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux-和-Mac"><span class="nav-number">3.1.</span> <span class="nav-text">Linux 和 Mac</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows"><span class="nav-number">3.2.</span> <span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Windows-10"><span class="nav-number">3.2.1.</span> <span class="nav-text">Windows 10+</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Windows7"><span class="nav-number">3.2.2.</span> <span class="nav-text">Windows7</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主体架构"><span class="nav-number">1.</span> <span class="nav-text">主体架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像"><span class="nav-number">2.</span> <span class="nav-text">镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#镜像层"><span class="nav-number">2.0.1.</span> <span class="nav-text">镜像层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器相连"><span class="nav-number">3.</span> <span class="nav-text">容器相连</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据卷"><span class="nav-number">4.</span> <span class="nav-text">数据卷</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法1-docker-v"><span class="nav-number">4.0.1.</span> <span class="nav-text">方法1:docker -v</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法2：Dockerfile中使用VOLUME指令"><span class="nav-number">4.0.2.</span> <span class="nav-text">方法2：Dockerfile中使用VOLUME指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法3：docker-v-拓展"><span class="nav-number">4.0.3.</span> <span class="nav-text">方法3：docker -v 拓展</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据容器"><span class="nav-number">5.</span> <span class="nav-text">数据容器</span></a></li></ol></div>
             
 
           </div>
