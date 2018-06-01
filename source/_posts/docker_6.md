@@ -22,6 +22,9 @@ default_name = 'ZMGLOVE Blog'
 salt = 'UNIQUE_SALT'
 
 @app.route('/',methods=['GET','POST'])
+```
+<!--more-->
+```python
 def mainpage():
     
     name = default_name
@@ -43,7 +46,6 @@ def mainpage():
     footer = '</body></html>'
 
     return header + body + footer
-
 #获取到图片
 @app.route('/monster/<name>')
 def get_identicon(name):
@@ -56,7 +58,7 @@ if __name__ == '__main__':
     # 这边使用0.0.0.0，因为需要把它绑定到所有网络接口，否则无法让主机或者其他容器访问到
     app.run(debug=True,host='0.0.0.0')
 ```
-<!--more-->
+
 其中这个里面使用了`hashlib`对姓名进行加密处理。
 还要修改Dockerfile文件
 ```bash
