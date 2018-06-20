@@ -1,5 +1,5 @@
 ---
-title: Gitlab-CI实战
+title: GitLab-CI实战
 date: 2018-06-18 08:09:23
 tags:
     - 运维

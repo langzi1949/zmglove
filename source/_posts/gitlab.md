@@ -1,5 +1,5 @@
 ---
-title: Gitlab安装
+title: GitLab安装
 date: 2018-06-17 09:29:43
 tags:
     - 运维
