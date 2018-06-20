@@ -251,6 +251,261 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/10/13/activemq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="langzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zmglove.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZMGLOVE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/activemq/" itemprop="url">ActiveMQ重连问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T19:00:08+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ul>
+<li><a href="#active_1">问题描述</a></li>
+<li><a href="#active_2">解决方案</a></li>
+</ul>
+<p><span id="active_1"><strong>问题描述</strong></span></p>
+<hr>
+<p>生产发现，当消息中间件activeMQ挂掉后，我们的应用并不能重新连接到activeMQ,而必须通过重启应用才能连接。<br>本地测试应用持续抛异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">2017</span>-<span class="number">02</span>-<span class="number">27</span> <span class="number">20</span>:<span class="number">05</span>:<span class="number">37.297</span> ERROR [jmsContainer-<span class="number">1</span>] o.s.j.l.DefaultMessageListenerContainer - Could not refresh JMS Connection <span class="keyword">for</span> destination <span class="string">'queue://gateway.qly.queue'</span> - retrying using FixedBackOff&#123;interval=<span class="number">5000</span>, currentAttempts=<span class="number">27</span>, maxAttempts=unlimited&#125;. Cause: <span class="keyword">this</span> connection</div><div class="line">org.apache.activemq.AlreadyClosedException: <span class="keyword">this</span> connection</div><div class="line"> at org.apache.activemq.pool.PooledConnection.assertNotClosed(PooledConnection.java:<span class="number">208</span>) ~[activemq-pool-<span class="number">5.7</span>.0.jar:<span class="number">5.7</span>.0]</div><div class="line"> at org.apache.activemq.pool.PooledConnection.start(PooledConnection.java:<span class="number">97</span>) ~[activemq-pool-<span class="number">5.7</span>.0.jar:<span class="number">5.7</span>.0]</div><div class="line"> at org.springframework.jms.connection.SingleConnectionFactory$SharedConnectionInvocationHandler.localStart(SingleConnectionFactory.java:<span class="number">632</span>) ~[spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.connection.SingleConnectionFactory$SharedConnectionInvocationHandler.invoke(SingleConnectionFactory.java:<span class="number">569</span>) ~[spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at com.sun.proxy.$Proxy58.start(Unknown Source) ~[na:na]</div><div class="line"> at org.springframework.jms.listener.AbstractJmsListeningContainer.refreshSharedConnection(AbstractJmsListeningContainer.java:<span class="number">400</span>) ~[spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.listener.DefaultMessageListenerContainer.refreshConnectionUntilSuccessful(DefaultMessageListenerContainer.java:<span class="number">915</span>) [spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.listener.DefaultMessageListenerContainer.recoverAfterListenerSetupFailure(DefaultMessageListenerContainer.java:<span class="number">890</span>) [spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:<span class="number">1061</span>) [spring-jms-<span class="number">4.2</span>.1.RELEASE.jar:<span class="number">4.2</span>.1.RELEASE]</div><div class="line"> at java.lang.Thread.run(Thread.java:<span class="number">745</span>) [na:<span class="number">1.7</span>.0_79]</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/13/activemq/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/10/08/iterm2-omz/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="langzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zmglove.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZMGLOVE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/08/iterm2-omz/" itemprop="url">iTerm2+oh my zsh+agnoster 最好用的终端</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T14:10:41+08:00">
+                2017-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近在同事的Mac上看到了一款可能是全宇宙最牛逼的终端，细细打听，原来使用的是iTerm2+omz+agnoster量身打造的。<br><img src="/images/iTerm_1.jpg" alt="&quot;&quot;"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/08/iterm2-omz/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/09/20/mongodb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -694,7 +949,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -707,7 +962,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

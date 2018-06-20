@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="运维," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介从 GitLab 8.0 开始，GitLab CI 就已经集成在 GitLab 中，我们只要在项目中添加一个 .gitlab-ci.yml 文件，然后添加一个 Runner，即可进行持续集成。本文将介绍如何使用 GitLab CI 进行持续集成。
+常见名词Pipeline一次 Pipeline 其实相当于一次构建任务，里面可以包含多个流程，如安装依赖、运行测试、编译、部署测试服务器、部署生产服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitlab-CI实战">
+<meta property="og:url" content="http://zmglove.com/2018/06/18/gitlab-ci/index.html">
+<meta property="og:site_name" content="ZMGLOVE">
+<meta property="og:description" content="简介从 GitLab 8.0 开始，GitLab CI 就已经集成在 GitLab 中，我们只要在项目中添加一个 .gitlab-ci.yml 文件，然后添加一个 Runner，即可进行持续集成。本文将介绍如何使用 GitLab CI 进行持续集成。
+常见名词Pipeline一次 Pipeline 其实相当于一次构建任务，里面可以包含多个流程，如安装依赖、运行测试、编译、部署测试服务器、部署生产服">
+<meta property="og:updated_time" content="2018-06-20T06:52:12.853Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gitlab-CI实战">
+<meta name="twitter:description" content="简介从 GitLab 8.0 开始，GitLab CI 就已经集成在 GitLab 中，我们只要在项目中添加一个 .gitlab-ci.yml 文件，然后添加一个 Runner，即可进行持续集成。本文将介绍如何使用 GitLab CI 进行持续集成。
+常见名词Pipeline一次 Pipeline 其实相当于一次构建任务，里面可以包含多个流程，如安装依赖、运行测试、编译、部署测试服务器、部署生产服">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zmglove.com/2018/06/18/gitlab-ci/"/>
+
+
+
+
+
+  <title>Gitlab-CI实战 | ZMGLOVE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZMGLOVE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我刚刚睡着,天刚刚破晓</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2018/06/18/gitlab-ci/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="langzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zmglove.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZMGLOVE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Gitlab-CI实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T08:09:23+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>从 GitLab 8.0 开始，GitLab CI 就已经集成在 GitLab 中，我们只要在项目中添加一个 <code>.gitlab-ci.yml</code> 文件，然后添加一个 Runner，即可进行持续集成。本文将介绍如何使用 GitLab CI 进行持续集成。</p>
+<h3 id="常见名词"><a href="#常见名词" class="headerlink" title="常见名词"></a>常见名词</h3><h5 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h5><p>一次 Pipeline 其实相当于一次构建任务，里面可以包含多个流程，如安装依赖、运行测试、编译、部署测试服务器、部署生产服务器等流程。<br>任何提交或者 Merge Request 的合并都可以触发 Pipeline，如下图所示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+------------------+           +----------------+</div><div class="line">|                  |  trigger  |                |</div><div class="line">|   Commit / MR    +----------&gt;+    Pipeline    |</div><div class="line">|                  |           |                |</div><div class="line">+------------------+           +----------------+</div></pre></td></tr></table></figure></p>
+<h5 id="Stages"><a href="#Stages" class="headerlink" title="Stages"></a>Stages</h5><p>Stages 表示构建阶段，说白了就是上面提到的流程。<br>我们可以在一次 Pipeline 中定义多个 Stages，这些 Stages 会有以下特点：<br><a id="more"></a></p>
+<ul>
+<li>所有 Stages 会按照顺序运行，即当一个 Stage 完成后，下一个 Stage 才会开始</li>
+<li>只有当所有 Stages 完成后，该构建任务 (Pipeline) 才会成功</li>
+<li>如果任何一个 Stage 失败，那么后面的 Stages 不会执行，该构建任务 (Pipeline) 失败</li>
+</ul>
+<p>因此，Stages 和 Pipeline 的关系就是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">+--------------------------------------------------------+</div><div class="line">|                                                        |</div><div class="line">|  Pipeline                                              |</div><div class="line">|                                                        |</div><div class="line">|  +-----------+     +------------+      +------------+  |</div><div class="line">|  |  Stage 1  |----&gt;|   Stage 2  |-----&gt;|   Stage 3  |  |</div><div class="line">|  +-----------+     +------------+      +------------+  |</div><div class="line">|                                                        |</div><div class="line">+--------------------------------------------------------+</div></pre></td></tr></table></figure></p>
+<h3 id="安装Gitlab-Runner"><a href="#安装Gitlab-Runner" class="headerlink" title="安装Gitlab-Runner"></a>安装Gitlab-Runner</h3><blockquote>
+<p>理解了上面的基本概念之后，有没有觉得少了些什么东西 —— 由谁来执行这些构建任务呢？<br>答案就是 GitLab Runner 了！</p>
+</blockquote>
+<p>想问为什么不是 GitLab CI 来运行那些构建任务？<br>一般来说，构建任务都会占用很多的系统资源 (譬如编译代码)，而 GitLab CI 又是 GitLab 的一部分，如果由 GitLab CI 来运行构建任务的话，在执行构建任务的时候，GitLab 的性能会大幅下降。</p>
+<p>GitLab CI 最大的作用是管理各个项目的构建状态，因此，运行构建任务这种浪费资源的事情就交给 GitLab Runner 来做拉！<br>因为 GitLab Runner 可以安装到不同的机器上，所以在构建任务运行期间并不会影响到 GitLab 的性能~</p>
+<h4 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h4><p>参考<a href="https://docs.gitlab.com/runner/install/linux-repository.html" target="_blank" rel="external">Gitlab官方文档</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.rpm.sh | sudo bash</div><div class="line">sudo yum install gitlab-ci-multi-runner</div></pre></td></tr></table></figure></p>
+<h4 id="注册Runner"><a href="#注册Runner" class="headerlink" title="注册Runner"></a>注册Runner</h4><p>安装好 GitLab Runner 之后，我们只要启动 Runner 然后和 CI 绑定就可以了：</p>
+<ul>
+<li>打开你 GitLab 中的项目页面，在项目设置中找到 runners</li>
+<li>运行 <code>sudo gitlab-ci-multi-runner register</code></li>
+<li>输入 CI URL</li>
+<li>输入 Token</li>
+<li>输入 Runner 的名字</li>
+<li>选择 Runner 的类型，简单起见还是选 Shell 吧</li>
+<li>完成</li>
+</ul>
+<p>当注册好 Runner 之后，可以用 <code>sudo gitlab-ci-multi-runner list</code> 命令来查看各个 Runner 的状态：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-runner list</div></pre></td></tr></table></figure></p>
+<h3 id="gitlab-ci-yml文件"><a href="#gitlab-ci-yml文件" class="headerlink" title=".gitlab-ci.yml文件"></a>.gitlab-ci.yml文件</h3><p>配置好 Runner 之后，我们要做的事情就是在项目根目录中添加 <code>.gitlab-ci.yml</code> 文件了。<br>当我们添加了 <code>.gitlab-ci.yml</code> 文件后，每次提交代码或者合并 MR 都会自动运行构建任务了。<br>这边给一个事例：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># version:1.0</span></div><div class="line"><span class="comment"># update: 2018-06-07</span></div><div class="line"><span class="comment"># from chenzehao@hidotech.com</span></div><div class="line"></div><div class="line"><span class="comment">### 测试环境</span></div><div class="line">.testRunner: <span class="meta">&amp;testRunner</span></div><div class="line"><span class="attr">  variables:</span></div><div class="line"><span class="attr">    SERVER_NAME:</span> <span class="string">"testmgh"</span></div><div class="line"><span class="attr">    SERVER_PORT:</span> <span class="string">"22222"</span></div><div class="line"><span class="attr">    DEST:</span> <span class="string">"/mushroom/server/java/"</span></div><div class="line"><span class="attr">    PROGRAM_NAME:</span> <span class="string">"mm-merchant-service"</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##### 警告：以下内容请勿更改！！！ #####</span></div><div class="line"><span class="attr">before_script:</span></div><div class="line"><span class="bullet">  -</span> echo $&#123;SERVER_NAME:?<span class="string">'no data'</span>&#125;</div><div class="line"><span class="bullet">  -</span> echo $&#123;SERVER_PORT:?<span class="string">'no data'</span>&#125;</div><div class="line"><span class="bullet">  -</span> echo $&#123;DEST:?<span class="string">'no data'</span>&#125;</div><div class="line"><span class="bullet">  -</span> echo $&#123;PROGRAM_NAME:?<span class="string">'no data'</span>&#125;</div><div class="line"><span class="bullet">  -</span> \[ <span class="string">"/"</span> = $DEST \] &amp;&amp; &#123; echo <span class="string">'$DEST not allowed!'</span>;exit <span class="number">1</span>; &#125;</div><div class="line"><span class="bullet">  -</span> \[ ! <span class="string">"/"</span> = $&#123;DEST:$(($&#123;<span class="comment">#DEST&#125;))-1&#125; \] &amp;&amp; &#123; echo '$DEST 请使用/结尾';exit 1; &#125;</span></div><div class="line"><span class="bullet">  -</span> <span class="string">'which ssh-agent || ( apt-get update -y &amp;&amp; apt-get install openssh-client -y )'</span></div><div class="line"><span class="bullet">  -</span> eval $(ssh-agent -s)</div><div class="line">  </div><div class="line">  </div><div class="line"></div><div class="line"><span class="attr">stages:</span></div><div class="line"><span class="bullet">  -</span> test</div><div class="line"></div><div class="line"><span class="attr">test:</span></div><div class="line"><span class="attr">  stage:</span> test</div><div class="line"><span class="attr">  script:</span></div><div class="line"><span class="bullet">    -</span> whoami</div><div class="line"><span class="bullet">    -</span> ssh-add &lt;(echo <span class="string">"$test_key"</span>)</div><div class="line"><span class="bullet">    -</span> echo $SERVER_NAME</div><div class="line"><span class="bullet">    -</span> mvn clean package -Ptest -Dmaven.test.skip=<span class="literal">true</span></div><div class="line"><span class="bullet">    -</span> ls -al target/$CI_PROJECT_NAME.jar &amp;&amp; md5sum target/$CI_PROJECT_NAME.jar</div><div class="line"><span class="bullet">    -</span> ssh -p$SERVER_PORT root@$SERVER_NAME <span class="string">"supervisorctl stop java:$PROGRAM_NAME"</span></div><div class="line"><span class="bullet">    -</span> ssh -p$SERVER_PORT root@$SERVER_NAME <span class="string">"find $DEST -maxdepth 1 -type d -name $CI_PROJECT_NAME | xargs rm -rf"</span></div><div class="line"><span class="bullet">    -</span> scp -P$SERVER_PORT target/$CI_PROJECT_NAME.jar root@$SERVER_NAME:$DEST</div><div class="line"><span class="bullet">    -</span> ssh -p$SERVER_PORT root@$SERVER_NAME <span class="string">"md5sum $DEST$CI_PROJECT_NAME.jar"</span></div><div class="line"><span class="bullet">    -</span> ssh -p$SERVER_PORT root@$SERVER_NAME <span class="string">"supervisorctl start java:$PROGRAM_NAME"</span></div><div class="line"><span class="bullet">    -</span> ssh -p$SERVER_PORT root@$SERVER_NAME <span class="string">"supervisorctl status java:"</span></div><div class="line">  &lt;&lt;: <span class="meta">*testRunner</span></div><div class="line"><span class="attr">  only:</span></div><div class="line"><span class="bullet">    -</span> /^release.*$/</div><div class="line"><span class="bullet">    -</span> /^hotfix.*$/</div><div class="line"><span class="attr">  tags:</span></div><div class="line"><span class="bullet">    -</span> local</div><div class="line"><span class="attr">  when:</span> manual</div></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://scarletsky.github.io/2016/07/29/use-gitlab-ci-for-continuous-integration/" target="_blank" rel="external">用 GitLab CI 进行持续集成</a><br><a href="https://www.jianshu.com/p/df433633816b" target="_blank" rel="external">gitlab之gitlab-ci自动部署</a><br><a href="https://www.cnblogs.com/restful/p/6711063.html" target="_blank" rel="external">gitlab-ci踩过的坑</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/运维/" rel="tag"># 运维</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/17/gitlab/" rel="next" title="Gitlab安装">
+                <i class="fa fa-chevron-left"></i> Gitlab安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zmglove.jpg"
+                alt="langzi" />
+            
+              <p class="site-author-name" itemprop="name">langzi</p>
+              <p class="site-description motion-element" itemprop="description">掌门哥哥</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/langzi1949" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2126293941" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/langzi1949" target="_blank" title="zhihu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>zhihu</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见名词"><span class="nav-number">2.</span> <span class="nav-text">常见名词</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pipeline"><span class="nav-number">2.0.1.</span> <span class="nav-text">Pipeline</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Stages"><span class="nav-number">2.0.2.</span> <span class="nav-text">Stages</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Gitlab-Runner"><span class="nav-number">3.</span> <span class="nav-text">安装Gitlab-Runner</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装步骤"><span class="nav-number">3.1.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注册Runner"><span class="nav-number">3.2.</span> <span class="nav-text">注册Runner</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitlab-ci-yml文件"><span class="nav-number">4.</span> <span class="nav-text">.gitlab-ci.yml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">langzi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
