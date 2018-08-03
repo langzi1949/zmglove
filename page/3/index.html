@@ -251,6 +251,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/10/26/middleware-specification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="langzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zmglove.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZMGLOVE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/26/middleware-specification/" itemprop="url">中间件使用规范</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-26T09:10:43+08:00">
+                2017-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>现在企业级系统中，各个系统之间的交互，以及系统自身的性能提升，不可避免的需要使用中间件，那么系统之间所需要的中间件需要哪些规范呢？结合我的工作，简单的罗列一下：</p>
+<hr>
+<ul>
+<li><strong>Zookeeper 使用规范</strong></li>
+</ul>
+<blockquote>
+<ol>
+<li><p><code>Zookeeper</code> 做为分布式配置服务、同步服务和命名注册。不建议将 Zookeeper 做为数据存储工具，如有分布式快速存储需求可用Redis代替；</p>
+</li>
+<li><p>不建议在相同节点下面放置过多子节点或数据；</p>
+</li>
+<li><p>将<code>Zookeeper</code> 做为分布式锁用时不建议自己去写客户端实现，用 <code>Curator</code> 现成的分布式锁 <code>InterProcessMutex</code> ( <a href="http://www.jianshu.com/p/5d12a01018e1">http://www.jianshu.com/p/5d12a01018e1</a> );</p>
+</li>
+</ol>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/26/middleware-specification/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/10/13/activemq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -949,7 +1087,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

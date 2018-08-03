@@ -251,6 +251,131 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2018/08/02/spi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="langzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zmglove.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZMGLOVE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/02/spi/" itemprop="url">Java-SPI机制和源码分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-02T11:01:00+08:00">
+                2018-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>SPI（Service Provider Interface），就是为了使不同厂商针对同一个接口做出不同实现，比如最常见的就是<code>JDBC</code>中 <strong>mysql</strong>和 <strong>postgresql</strong>，他们都提供了JDBC的实现方式，而<code>SPI</code>机制可以为某个接口寻找到具体的实现。<br>为了使得服务的可插拔，在接口实现时，不能采取硬编码的方式。所以java的<code>SPI</code>就派上了用场。<br/><br>当服务的提供者提供了一种接口的实现方式，需要在classpath下的<code>META-INFO/services/</code>目录里面创建一个以服务接口命名的文件（是接口的全路径名称），这个文件里面的内容就是接口的具体的实现类。当其他的程序需要这个服务的时候，就可以通过查找这个jar包（一般都是以jar包做依赖）<code>META-INF/services/</code>中的配置文件，配置文件中有接口的具体实现类名，可以根据这个类名进行加载实例化，就可以使用该服务了。<br/><br>JDK中查找服务的工具类是<code>java.util.ServiceLoader</code></p>
+<h3 id="以JDBC作为例子"><a href="#以JDBC作为例子" class="headerlink" title="以JDBC作为例子"></a>以JDBC作为例子</h3><p>在jdbc4.0之前，我们创建数据库连接的时候，通常需要<code>Class.forName(&quot;com.mysql.jdbc.Driver&quot;)</code>这句话进行驱动的加载，然后再获取连接。但是在jdbc4.0以后，就不需要这句话来加载驱动了，而是直接获取连接就行了，这个就是通过<code>SPI</code>机制实现的。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/02/spi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zmglove.com/2018/06/18/gitlab-ci/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,138 +1116,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zmglove.com/2017/12/31/2017/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="langzi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/zmglove.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZMGLOVE">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/31/2017/" itemprop="url">2017回顾以及2018展望</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-31T23:09:00+08:00">
-                2017-12-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="写在岁末"><a href="#写在岁末" class="headerlink" title="写在岁末"></a>写在岁末</h2><p>岁月如梭，时光荏苒，一眨眼一年又过去了，回望2017，其实没有很多东西值得去诉说。我打算从工作和生活两个大的方向大致粗劣的说一下。</p>
-<h3 id="工作篇"><a href="#工作篇" class="headerlink" title="工作篇"></a>工作篇</h3><p>2017的工作，一个词可以简明扼要的总结：<strong>碌碌无为</strong><br/><br>自己在工作上几乎是上一天班，撞一天钟，工作中没有很大的变化，依旧在公司<strong>负责风控和第三方数据源的对接工作</strong>，只是以前是程序员，现在渐渐的往技术经理的方向发展。</p>
-<ul>
-<li>从SpringMVC转变成了SpringBoot微服务架构；</li>
-<li>从早期的disruptor框架到Akka框架，性能较之前有了10倍的提升，处理速度更加快速；</li>
-<li>从之前的零星几个数据源，到如今对接了将近15个数据源，为风控作了强有力的风险支撑，决策上也更加可靠；</li>
-<li>从传统的云主机向Docker容器化过渡，实现了服务的快速拓展，使得主机的利用率大幅提高。</li>
-</ul>
-<p>技术上依旧是在重复着之前的工作，只能说现在的经验还算丰富，处理问题的能力较之前有了很大的进步。<br/>在学习新技术上，主要放在了Python上，Python的数据分析，爬虫是目前学习的主要方向。Groovy动态语言的学习也在进行中。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/31/2017/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1177,7 +1170,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
